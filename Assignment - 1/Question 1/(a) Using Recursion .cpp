@@ -32,8 +32,7 @@ operator<<( std::ostream& dest, __int128_t value )
 
 struct timespec;
 
-time_t c1;
-time_t c2;
+time_t c1, c2;
 
 __int128 fib(__int128 n){
     if (n == 0){
