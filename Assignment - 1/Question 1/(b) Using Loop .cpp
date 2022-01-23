@@ -2,11 +2,10 @@
 #include <sys/time.h>
 
 using namespace std;
-typedef long long ll;
+typedef long long int ll;
 
-std::ostream&
-operator<<( std::ostream& dest, __int128_t value )
-{
+std::ostream& 
+operator<<( std::ostream& dest, __int128_t value ){
     std::ostream::sentry s( dest );
     if ( s ) {
         __uint128_t tmp = value < 0 ? -value : value;
@@ -30,30 +29,29 @@ operator<<( std::ostream& dest, __int128_t value )
     return dest;
 }
 
-long gettime(){
-    struct timeval start;
-    gettimeofday(&start, NULL);
+struct timespec;
 
-    return start.tv_sec*1000000 + start.tv_usec;
-}
+time_t c1, c2;
 
 int main() {
-    long start = gettime();
+    c1 = clock();
 
     __int128 a = 0, b = 1;
+    
     cout << a << " ";
     for (int i = 1; i <= 100; i++){
         cout << b << " ";
-        __int128 t = a;
+
+        __int128 temp = a;
         a = b;
-        b += t;
+        b += temp;
     }
 
-    cout << "\n";
+    cout << endl;
 
-    long end = gettime();
-
-    cout << end - start;
+    c2 = clock() - c1;
+    float CPU_time = (float)c2 / CLOCKS_PER_SEC;
+    cout << "The time taken by the program - B is: " << CPU_time<< endl;
 
     return 0;
 }
