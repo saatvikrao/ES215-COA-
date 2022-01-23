@@ -3,8 +3,7 @@
 
 using namespace std;
 
-struct timespec;
-time_t c1, c2;
+struct timespec; time_t c1, c2;
 
 int main(){
     c1 = clock();
@@ -17,13 +16,13 @@ int main(){
 
     for (int i = 0; i < n; i++){
         for (int j = 0; j < n; j++){
-            arr1[i][j] = (rand() % (11));
+            arr1[i][j] = (rand() % 5);
         }
     }
 
     for (int i = 0; i < n; i++){
         for (int j = 0; j < n; j++){
-            arr2[i][j] = (rand() % (11));
+            arr2[i][j] = (rand() % 5);
         }
     }
 
@@ -48,7 +47,7 @@ int main(){
     c2 = clock() - c1;
     float CPU_time = (float)c2 / CLOCKS_PER_SEC;
 
-    cout << "The time taken is:" << " " << CPU_time << endl;
+    cout << "The time taken is: " << CPU_time << "\n";
 
     return 0;
 }
