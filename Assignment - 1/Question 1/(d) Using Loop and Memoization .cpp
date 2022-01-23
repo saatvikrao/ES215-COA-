@@ -5,8 +5,7 @@ using namespace std;
 typedef long long ll;
 
 std::ostream&
-operator<<( std::ostream& dest, __int128_t value )
-{
+operator<<( std::ostream& dest, __int128_t value ){
     std::ostream::sentry s( dest );
     if ( s ) {
         __uint128_t tmp = value < 0 ? -value : value;
@@ -30,16 +29,12 @@ operator<<( std::ostream& dest, __int128_t value )
     return dest;
 }
 
-long gettime(){
-    struct timeval start;
-    gettimeofday(&start, NULL);
-
-    return start.tv_sec*1000000 + start.tv_usec;
-}
+struct timespec;
+time_t c1, c2;
 
 __int128 arr[1000] = {0};
 
-__int128 fibonacci(__int128 n){
+__int128 fib(__int128 n){
     if (n == 0){
         return 0;
     } else if (n == 1){
@@ -47,9 +42,7 @@ __int128 fibonacci(__int128 n){
     } else if (arr[n] != 0){
         return arr[n];
     } else {
-        __int128 i = 1;
-        __int128 prev = 0;
-        __int128 curr = 1;
+        __int128 i = 1, prev = 0, curr = 1;
 
         while (i < n + 1){
             while (arr[i] != 0){
@@ -70,17 +63,20 @@ __int128 fibonacci(__int128 n){
 }
 
 int main() {
-    long start = gettime();
+    c1 = clock();
 
     arr[0] = 0;
     arr[1] = 1;
-    for (__int128 i = 0; i <= 100; i++){
-        cout << fibonacci(i) << " ";
-    }
-    cout << endl;
 
-    long end = gettime();
-    cout << end - start;
+    for (__int128 i = 0; i <= 100; i++){
+        cout << fib(i) << " ";
+    }
+    cout << "\n";
+
+    c2 = clock() - c1;
+
+    float CPU_time = (float)c2 / CLOCKS_PER_SEC;
+    cout << "The time taken by the program - D is:" << " " << CPU_time << endl;
 
     return 0;
 }
