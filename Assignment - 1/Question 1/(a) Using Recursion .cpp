@@ -30,12 +30,10 @@ operator<<( std::ostream& dest, __int128_t value )
     return dest;
 }
 
-long gettime(){
-    struct timeval start;
-    gettimeofday(&start, NULL);
+struct timespec;
 
-    return start.tv_sec*1000000 + start.tv_usec;
-}
+time_t c1;
+time_t c2;
 
 __int128 fib(__int128 n){
     if (n == 0){
@@ -45,20 +43,21 @@ __int128 fib(__int128 n){
         return 1;
     }
 
-    return fib(n-1) + fib(n-2);
+    return fib(n - 1) + fib(n - 2);
 }
 
-int main() {
-    long start = gettime();
+int main(){
+    c1 = clock();
 
-    for (__int128 i = 0; i <= 40; i++){
-        cout << fib(i) << " ";
+    for (int i = 0; i < 40; i++){
+        cout << i + 1 << " " << fib(i);
+        cout << "\n";
     }
-    cout << "\n";
-    
-    long end = gettime();
 
-    cout << end - start;
+    c2 = clock() - c1;
+    float CPU_time = (float)c2 / CLOCKS_PER_SEC;
+
+    cout << "The time taken by program - A is: " << CPU_time << "\n";
 
     return 0;
 }
